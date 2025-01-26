@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'succes.css' %}">
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>Welcome!</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <p>Steam ID: {{ steam_id }}</p>
+        <p>Steam Name: {{ player_info.personaname }}</p>
+        <img src="{{ player_info.avatarfull }}" alt="Steam Avatar">
+
+        <h2>Inventory Items</h2>
+        <div class="inventory-container">
+            {% if inventory_items %}
+                {% for item in inventory_items %}
+                    <div class="inventory-item">
+                        <img src="{{ item.icon_url }}" alt="{{ item.name }}">
+                        <p>{{ item.market_name }}</p>
+                        {% if item.wear %}
+                            <p>Wear: {{ item.wear }}</p>
+                        {% endif %}
+                        {% if item.rarity %}
+                            <p>Rarity: {{ item.rarity }}</p>
+                        {% endif %}
+                        {% if item.tradable %}
+                            <p>Tradable</p>
+                        {% endif %}
+                        {% if item.price %}
+                            <p>Price: {{ item.price }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No items found in inventory or inventory is private</p>
+            {% endif %}
+        </div>
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">login</a> first</p>
+    {% endif %}
+</body>
+</html>

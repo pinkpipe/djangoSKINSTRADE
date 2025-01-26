@@ -1,0 +1,43 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: autoflake
+        name: Running autoflake
+        entry: autoflake --in-place --remove-all-unused-imports --ignore-init-module-imports
+        language: python
+        files: .*.py
+        types: [ python ]
+    -   id: isort
+        name: Running isort
+        entry: isort
+        language: python
+        files: .*.py
+        types: [ python ]
+    -   id: black
+        name: Running black
+        entry: black
+        language: python
+        files: .*.py
+        exclude: >
+          (?x)(pyproject.toml)|(.cpp)|(.cmd)
+        types: [ python ]
+    -   id: flake8
+        name: Running flake8
+        entry: flake8 --count
+        language: python
+        types: [ python ]
+        files: .*.py
+        exclude: >
+          (?x)(.cpp)|(.cmd)
+    -   id: mypy
+        name: Running mypy
+        entry: mypy
+        language: python
+        files: .*.py
+        exclude: >
+          (?x)(
+              ^src/tests/
+          )|(pyproject.toml
+          )|(.cpp
+          )|(.cmd)
+        types: [ python ]
