@@ -42,6 +42,27 @@
             {% endif %}
         </div>
 
+        <form method="post" action="{% url 'tradelink' %}">
+            {% csrf_token %}
+            <label for="tradelink">Трейд ссылка:</label>
+            <input type="text" name="tradelink" id="tradelink" value="{{ user_st.trade_link }}">
+            <button type="submit">Применить</button>
+        </form>
+
+        <form method="post" action="{% url 'email' %}">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ user_st.email }}">
+            <button type="submit">Применить</button>
+        </form>
+
+        <form method="post" action="{% url 'telegram' %}">
+            {% csrf_token %}
+            <label for="telegram">Telegram:</label>
+            <input type="text" name="telegram" id="telegram" value="{{ user_st.telegram }}">
+            <button type="submit">Применить</button>
+        </form>
+
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit">Logout</button>
