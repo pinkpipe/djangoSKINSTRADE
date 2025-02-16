@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Полноценный Navbar</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono", "Droid Sans Mono", monospace;
+      background-image: url("../../static/assets/dust2.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      user-select: none;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <!--Левая часть навигации-->
+      <div class="flex items-center gap-4">
+        <img src="../../static/assets/logo (1).png" alt="Fullstack Arena" class="h-8 w-20">
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-[#CC97B1] transition duration-300 text-sm">Маркет</a>
+          <a href="#" class="hover:text-[#CC97B1]  transition duration-300 text-sm">FAQ</a>
+        </div>
+      </div>
+      <!--Правая часть навигации-->
+      <div class="flex items-center gap-4">
+        <span class="text-[#C5DFF8] text-sm">99 999,99$</span>
+        <img src="../../static/assets/user.png" alt="Аватар" class="h-8 w-8 rounded-full border border-[#CC97B1] border-2">
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 mt-4 flex">
+  <!-- Sidebar -->
+  <aside class="flex flex-col w-1/5 bg-black bg-opacity-75 pt-2 gap-2 h-screen rounded-tl-3xl">
+    <h2 class="text-center text-white text-sm font-semibold">МЕНЮ</h2>
+    <div class="pl-4 pt-2 text-white flex items-center hover:bg-opacity-50 hover:bg-[#CC97B1] transition duration-200 cursor-pointer">
+      <i class="fas fa-user mr-2 text-xs"></i>
+      <span class="text-xs">Личный кабинет</span>
+    </div>
+    <div class="pl-4 text-white flex items-center hover:bg-opacity-50 hover:bg-[#CC97B1] transition duration-200 cursor-pointer">
+      <i class="fas fa-history mr-2 text-xs"></i>
+      <span class="text-xs">История</span>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex flex-col w-full">
+    <!-- Header sidebar -->
+    <div class="flex justify-between bg-black bg-opacity-50 w-full px-2 rounded-tr-3xl h-12 items-center">
+      <p class="text-white font-semibold text-sm">История сделок</p>
+      <div>
+        <span class="text-xs">
+          Статус
+          <i class="fa-duotone fa-solid fa-chevron-down"></i>
+        </span>
+        <span class="text-xs">
+          Все
+          <i class="fa-duotone fa-solid fa-chevron-down"></i>
+        </span>
+        <span class="text-xs">
+          Тип
+          <i class="fa-duotone fa-solid fa-chevron-down"></i>
+        </span>
+        <button class="bg-[#CC97B1] hover:bg-[#b4c6da] text-black px-2 rounded rounded-tr-2xl w-24 text-sm">Выйти</button>
+      </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="flex-grow p-4">
+      <div class="bg-black bg-opacity-50 p-4 rounded">
+        <table class="min-w-full">
+          <thead>
+          <tr class="grid grid-cols-5 text-center font-bold mb-2">
+            <th class="p-2">Тип</th>
+            <th class="p-2">ID транзакции</th>
+            <th class="p-2">Статус</th>
+            <th class="p-2">Детали</th>
+            <th class="p-2">Дата</th>
+          </tr>
+          </thead>
+          <tbody class="space-y-2 border-t border-gray-400">
+          <tr class="grid grid-cols-5 p-2 mt-6 bg-white bg-opacity-25 rounded">
+            <td class="text-green-400 text-center">ШТУРМОВАЯ ВИНТОВКА</td>
+            <td class="text-center">№454pe4323nis</td>
+            <td class="text-green-400 text-center">Получен</td>
+            <td class="text-center">AK-47 | Вулкан</td>
+            <td class="text-center">21.01.2025</td>
+          </tr>
+          <tr class="grid grid-cols-5 p-2 bg-yellow-600 bg-opacity-25 rounded">
+            <td class="text-yellow-300 text-center">ПЕРЧАТКИ</td>
+            <td class="text-center">№329gn23430mic</td>
+            <td class="text-yellow-300 text-center">Ожидает оплату</td>
+            <td class="text-center">Перчатки спецназа | Уд...</td>
+            <td class="text-center">20.01.2025</td>
+          </tr>
+          <tr class="grid grid-cols-5 p-2 bg-red-700 bg-opacity-25 rounded">
+            <td class="text-red-400 text-center">КЛЮЧИ</td>
+            <td class="text-center">№356po56770rno</td>
+            <td class="text-red-400 text-center">Отменено</td>
+            <td class="text-center">Ключ от кейса «Запрет...</td>
+            <td class="text-center">19.01.2025</td>
+          </tr>
+          <tr class="grid grid-cols-5 p-2 bg-white bg-opacity-25 rounded">
+            <td class="text-green-400 text-center">ШТУРМОВАЯ ВИНТОВКА</td>
+            <td class="text-center">№234xe42340xis</td>
+            <td class="text-green-400 text-center">Получен</td>
+            <td class="text-center">AK-47 | Вулкан</td>
+            <td class="text-center">21.01.2025</td>
+          </tr>
+          <tr class="grid grid-cols-5 p-2 bg-white bg-opacity-25 rounded">
+            <td class="text-green-400 text-center">ШТУРМОВАЯ ВИНТОВКА</td>
+            <td class="text-center">№123we12330nsq</td>
+            <td class="text-green-400 text-center">Получен</td>
+            <td class="text-center">AK-47 | Редлайн</td>
+            <td class="text-center">21.01.2025</td>
+          </tr>
+          <tr class="grid grid-cols-5 p-2 bg-white bg-opacity-25 rounded">
+            <td class="text-green-400 text-center">ШТУРМОВАЯ ВИНТОВКА</td>
+            <td class="text-center">№132ws12320wqs</td>
+            <td class="text-green-400 text-center">Получен</td>
+            <td class="text-center">AK-47 | Волна</td>
+            <td class="text-center">21.01.2025</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

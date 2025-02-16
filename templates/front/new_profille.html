@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полноценный Navbar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono", "Droid Sans Mono", monospace;
+            background-image: url("../../static/assets/dust2.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            user-select: none;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!--Левая часть навигации-->
+            <div class="flex items-center gap-4">
+                <img src="../../static/assets/logo (1).png" alt="Fullstack Arena" class="h-8 w-20">
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-[#CC97B1] transition duration-300 text-sm">Маркет</a>
+                    <a href="#" class="hover:text-[#CC97B1]  transition duration-300 text-sm">FAQ</a>
+                </div>
+            </div>
+            <!--Правая часть навигации-->
+            <div class="flex items-center gap-4">
+                <span class="text-[#C5DFF8] text-sm">99 999,99$</span>
+                <img src="../../static/assets/user.png" alt="Аватар" class="h-8 w-8 rounded-full border border-[#CC97B1] border-2">
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 mt-4 flex">
+    <!-- Sidebar -->
+    <aside class="flex flex-col w-1/5 bg-black bg-opacity-75 pt-2 gap-2 h-screen rounded-tl-3xl">
+        <h2 class="text-center text-white text-sm font-semibold">МЕНЮ</h2>
+        <div class="pl-4 pt-2 text-white flex items-center hover:bg-opacity-50 hover:bg-[#CC97B1] transition duration-200 cursor-pointer">
+            <i class="fas fa-user mr-2 text-xs"></i>
+            <span class="text-xs">Личный кабинет</span>
+        </div>
+        <div class="pl-4 text-white flex items-center hover:bg-opacity-50 hover:bg-[#CC97B1] transition duration-200 cursor-pointer">
+            <i class="fas fa-history mr-2 text-xs"></i>
+            <span class="text-xs">История</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex flex-col w-full">
+        <!-- Header sidebar -->
+        <div class="flex justify-between bg-black bg-opacity-50 w-full px-2 rounded-tr-3xl h-12 items-center">
+            <p class="text-white font-semibold text-sm">Личный кабинет</p>
+            <div>
+                <button class="bg-[#CC97B1] hover:bg-[#B387A1] text-black px-2 rounded rounded-tr-2xl w-24 text-sm">Выйти</button>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="grid grid-cols-2 gap-4 p-4">
+            <!-- Card 1 -->
+            <div class="bg-black bg-opacity-75 p-4 rounded-lg flex flex-col gap-4">
+                <h3 class="text-white text-sm font-semibold opacity-85">Профиль</h3>
+                <div class="flex items-center justify-between gap-4 px-4">
+                    <!-- Left Column (Avatar + Nickname) -->
+                    <div class="flex flex-col gap-4 items-center">
+                        <img src="{{ player_info.avatarfull }}" alt="Avatar" class="w-12 h-12 rounded-full border border-white">
+                        <p class="text-white font-bold text-xs">{{ player_info.personaname }}</p>
+                    </div>
+                    <!-- Right Column (Details) -->
+                    <div class="flex flex-col text-white text-xs pb-4">
+                        <p>
+                            Дата регистрации: <span class="font-bold">01.01.2023</span>
+                        </p>
+                        <hr class="my-2 border-gray-400">
+                        <p>
+                            <span class="text-[#C5DFF8] opacity-75">Количество сделок:</span> <span class="font-bold">23</span>
+                        </p>
+                        <p>
+                            <span class="text-[#C5DFF8] opacity-75">Рейтинг:</span> <span class="font-bold">4.8</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-black bg-opacity-75 p-4 rounded-lg">
+                <h2 class="text-sm mb-2 opacity-85">Контактная информация</h2>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-400">
+                        <span class="text-xs">Эл. почта: {{ user_st.email }}</span>
+                        <div class="space-x-2">
+                            <i class="fas fa-pencil-alt text-xs cursor-pointer hover:text-[#B387A1] transition duration-200"></i>
+                            <i class="fas fa-trash text-xs cursor-pointer hover:text-red-400 transition duration-200"></i>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-400">
+                        <span class="text-xs">Телеграмм: {{ user_st.telegram }}</span>
+                        <div class="space-x-2">
+                            <i class="fas fa-pencil-alt text-xs cursor-pointer hover:text-[#B387A1] transition duration-200"></i>
+                            <i class="fas fa-trash text-xs cursor-pointer hover:text-red-400 transition duration-200"></i>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-400">
+                        <span class="text-xs">Номер: +7 (967) *** 45 08</span>
+                        <div class="space-x-2">
+                            <i class="fas fa-pencil-alt text-xs cursor-pointer hover:text-[#B387A1] transition duration-200"></i>
+                            <i class="fas fa-trash text-xs cursor-pointer hover:text-red-400 transition duration-200"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-black bg-opacity-75 p-4 rounded-lg col-span-2">
+                <h2 class="text-sm mb-2 opacity-85">Общая информация</h2>
+                <div class="space-y-2">
+                    <div class="flex items-center pb-2 border-b border-gray-400">
+                        <span class="text-[#C5DFF8] opacity-75 text-xs">Торговая ссылка:</span>
+                        <input class="bg-[#CC97B1] bg-opacity-50 text-white p-1 rounded text-xs w-2/3" readonly="" type="text" value="https://steamcommunity.com/tradeoffer/new/?partner=333838099&amp;token=HKw94Dyk"/>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-400">
+                        <span class="text-xs">
+                            <span class="text-[#C5DFF8] opacity-75">Ссылка продавца:</span> https://skinstrade.ru/?sellerid=12345678
+                        </span>
+                        <button class="px-2 py-1 text-[#C5DFF8] opacity-75 text-xs">Скопировать</button>
+                    </div>
+                    <div class="pt-2">
+                        <span class="text-xs">
+                            <span class="text-[#C5DFF8] opacity-75">Steam ID64:</span> {{ steam_id }}
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-2 pt-2">
+                        <span class="text-xs">
+                            <span class="text-[#C5DFF8] opacity-75">Разрешение:</span> Разрешить использование сеансовых файлов cookie Steam
+                        </span>
+                        <label class="inline-flex items-center cursor-pointer pl-6">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="relative w-7 h-4 bg-[#7895CB] rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-[#7895CB] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-[#27346E] after:content-[''] after:absolute after:top-0.5 after:start-[1px] after:bg-[#27346E] after:border-[#7895CB] after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-[#7895CB] peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
