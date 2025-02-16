@@ -46,7 +46,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
 
-SOCIAL_AUTH_STEAM_API_KEY = "5B858BED9EACBBF865E48DCCD10EFE80"  # Получите его на https://steamcommunity.com/dev/apikey
+SOCIAL_AUTH_STEAM_API_KEY = "0C90EDEDB60458E71C209D589E1BD608"  # Получите его на https://steamcommunity.com/dev/apikey
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ["player"]
 
 LOGIN_URL = "login"

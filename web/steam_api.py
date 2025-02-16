@@ -1,8 +1,6 @@
-import asyncio
 import logging
 import re
 
-import aiohttp
 import requests
 
 logger = logging.getLogger(__name__)
@@ -10,9 +8,9 @@ logger = logging.getLogger(__name__)
 
 def fetch_price_sync(market_hash_name):
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Accept': 'application/json',
-        'Accept-Language': 'en-US,en;q=0.9',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Accept": "application/json",
+        "Accept-Language": "en-US,en;q=0.9",
     }
 
     url = f"https://steamcommunity.com/market/priceoverview/?appid=730&currency=5&market_hash_name={market_hash_name}"
@@ -24,18 +22,20 @@ def fetch_price_sync(market_hash_name):
             if data.get("success", False):
                 price_str = data.get("median_price") or data.get("lowest_price")
                 if price_str:
-                    logger.debug(f"Original price string for {market_hash_name}: {price_str}")
+                    logger.debug(
+                        f"Original price string for {market_hash_name}: {price_str}"
+                    )
 
                     # Используем регулярное выражение для извлечения только цифр, запятых и точек
-                    price_str = re.sub(r'[^0-9,.]', '', price_str)
+                    price_str = re.sub(r"[^0-9,.]", "", price_str)
                     logger.debug(f"Cleaned price string: {price_str}")
 
-                    if ',' in price_str:
+                    if "," in price_str:
                         # Если есть запятая, заменяем её на точку
-                        price_str = price_str.replace(',', '.')
+                        price_str = price_str.replace(",", ".")
 
                     # Удаляем точку в конце, если она есть
-                    price_str = price_str.rstrip('.')
+                    price_str = price_str.rstrip(".")
 
                     logger.debug(f"Final price string before conversion: {price_str}")
 
@@ -43,7 +43,7 @@ def fetch_price_sync(market_hash_name):
                     price = float(price_str)
 
                     # Если цена больше 1000, вероятно она в копейках
-                    if price > 1000 and ',' not in price_str:
+                    if price > 1000 and "," not in price_str:
                         price = price / 100
 
                     logger.debug(f"Final price: {price}")
@@ -61,7 +61,8 @@ def fetch_all_prices_sync(market_hash_names):
         prices.append(price)
     return prices
 
-#RUST - 252490
+
+# RUST - 252490
 def get_steam_inventory(steam_id, game_id="730"):
     url = f"https://steamcommunity.com/inventory/{steam_id}/{game_id}/2"
     try:
@@ -100,7 +101,7 @@ def parse_inventory_items(inventory_data):
         }
 
         market_names = []
-        tradable_items = {}  # Словарь для хранения tradable предметов
+        tradable_items = {}  # Словарь для хранения tradable предметов | потом на Redis
 
         # Сначала собираем только tradable предметы
         for asset in assets:
@@ -135,13 +136,19 @@ def parse_inventory_items(inventory_data):
                 "marketable": description.get("marketable", 0),
                 "type": description.get("type", ""),
                 "wear": next(
-                    (tag.get("name") for tag in description.get("tags", [])
-                     if tag.get("category") == "Exterior"),
+                    (
+                        tag.get("name")
+                        for tag in description.get("tags", [])
+                        if tag.get("category") == "Exterior"
+                    ),
                     None,
                 ),
                 "rarity": next(
-                    (tag.get("name") for tag in description.get("tags", [])
-                     if tag.get("category") == "Rarity"),
+                    (
+                        tag.get("name")
+                        for tag in description.get("tags", [])
+                        if tag.get("category") == "Rarity"
+                    ),
                     None,
                 ),
                 "price": formatted_price,

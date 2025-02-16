@@ -2,19 +2,19 @@ import logging
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from social_django.models import UserSocialAuth
 
-from .steam_api import get_steam_inventory, parse_inventory_items
-
 from web.models import *
+
+from .steam_api import get_steam_inventory, parse_inventory_items
 
 logger = logging.getLogger(__name__)
 
 
 def login(request):
-    return render(request, "index.html")
+    return render(request, "front/index.html")
 
 
 @login_required
@@ -29,7 +29,7 @@ def home(request):
             steam_ID=steam_id,
             defaults={
                 "username": player_info.get("personaname", steam_id),
-            }
+            },
         )
         if created:
             logger.info(f"Created user {user_st.username}")
@@ -50,13 +50,15 @@ def home(request):
             "player_info": player_info,
             "inventory_items": inventory_items,
             "user_st": user_st,
-            "error": error_message
+            "error": error_message,
         }
-        return render(request, "successfully.html", context)
+        return render(request, "front/new_profille.html", context)
 
     except UserSocialAuth.DoesNotExist:
         logger.error("Steam authentication not found")
-        return render(request, "successfully.html", {"error": "Steam authentication not found"})
+        return render(
+            request, "successfully.html", {"error": "Steam authentication not found"}
+        )
     except Exception as e:
         logger.error(f"Error in home view: {str(e)}")
         return render(request, "successfully.html", {"error": str(e)})
@@ -73,7 +75,7 @@ def save_tradelink(request):
             user.trade_link = tradelink
             user.save()
 
-        return redirect(reverse('home'))
+        return redirect(reverse("home"))
     else:
         return HttpResponse("Недопустимый метод запроса!")
 
@@ -89,7 +91,7 @@ def save_email(request):
             user.email = email
             user.save()
 
-        return redirect(reverse('home'))
+        return redirect(reverse("home"))
     else:
         return HttpResponse("Недопустимый метод запроса!")
 
@@ -105,6 +107,6 @@ def save_telegram(request):
             user.telegram = telegram
             user.save()
 
-        return redirect(reverse('home'))
+        return redirect(reverse("home"))
     else:
         return HttpResponse("Недопустимый метод запроса!")
